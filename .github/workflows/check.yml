@@ -1,14 +1,15 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Base branch check
 
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   pull_request:
-    branches: [ main,test,test1 ]
+    branches: [ main, staging ]
 jobs:
   prod-check:
+    if: github.head_ref == 'test'
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deploying to production server on branch $GITHUB_REF $GITHUB_HEAD_REF"
