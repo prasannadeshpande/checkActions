@@ -11,18 +11,9 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  prod-check:
+    if: github.head_ref == 'refs/heads/testbranch'
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: PR head repo
-        id: head_repo_name
-        run: |
-          HEAD_REPO_NAME=$(jq -r '.pull_request.head.repo.full_name' "$GITHUB_EVENT_PATH")
-          echo "PR head repo: $HEAD_REPO_NAME"
-          echo "::set-output name=repo::$HEAD_REPO_NAME"
-          echo github.head_ref
+      - run: echo "PR from on branch $GITHUB_REF"
 
