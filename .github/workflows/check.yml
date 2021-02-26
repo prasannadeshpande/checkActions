@@ -9,7 +9,7 @@ on:
     branches: [ main,test,test1 ]
 jobs:
   prod-check:
-    if: github.ref == 'refs/heads/test'
+    if: github.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deploying to production server on branch $GITHUB_REF $GITHUB_HEAD_REF"
